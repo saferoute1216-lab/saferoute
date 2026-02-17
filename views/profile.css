@@ -1,4 +1,6 @@
-/* ================= RESET + BASE ================= */
+/* ======================================================
+   RESET + BASE
+====================================================== */
 
 html, body {
     height: 100%;
@@ -6,16 +8,43 @@ html, body {
 }
 
 body {
-    margin: 0;
     font-family: 'Poppins', sans-serif;
     background: #f2f5f7;
+
     display: flex;
     flex-direction: column;
 }
 
-/* ================= PROFILE CONTAINER ================= */
+header {
+    flex-shrink: 0;
+}
+
+/* =========================
+   FORCE FULL-WIDTH FOOTER
+========================= */
+
+footer,
+.footer {
+    width: 100%;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+/* if your footer uses a class instead of tag — safety */
+.footer {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+
+/* ======================================================
+   LAYOUT — PROFILE PAGE
+====================================================== */
+
 .profile-container {
-    padding: 140px 40px 120px;  /* increase bottom padding */
+    padding: 140px 40px 0px;
     max-width: 1100px;
     margin: auto;
     flex: 1;
@@ -29,19 +58,27 @@ body {
     align-items: start;
 }
 
+
+/* ======================================================
+   CARD BASE
+====================================================== */
+
 .card {
     background: white;
     border-radius: 18px;
     padding: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     border: 1px solid #e5e9ef;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
-/* ================= PROFILE CARDS ================= */
+
+/* ======================================================
+   GRID AREAS
+====================================================== */
+
 .main-profile {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    height: fit-content;
 }
 
 .side-card {
@@ -52,9 +89,16 @@ body {
 .evac-card {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
-    height: fit-content;
-    margin-top: 0;
 }
+
+.full-width {
+    grid-column: 1 / 3;
+}
+
+
+/* ======================================================
+   PROFILE CONTENT
+====================================================== */
 
 .profile-row {
     display: flex;
@@ -75,7 +119,11 @@ body {
     margin: 6px 0;
 }
 
-/* ================= STATUS ================= */
+
+/* ======================================================
+   STATUS BADGE
+====================================================== */
+
 .status {
     margin-left: auto;
     display: flex;
@@ -91,6 +139,11 @@ body {
     font-weight: 600;
     border: 1px solid #b6e5b6;
 }
+
+
+/* ======================================================
+   FAMILY / NOTIFICATIONS
+====================================================== */
 
 .side-card hr {
     margin: 15px 0;
@@ -109,14 +162,19 @@ body {
 
 .notif-option.checked {
     background: #e7f5e7;
-    border: 1px solid #b6e5b6;
+    border-color: #b6e5b6;
 }
 
 .notif-option.checked::after {
     content: "✔";
-    color: #1f5b1f;
     font-weight: bold;
+    color: #1f5b1f;
 }
+
+
+/* ======================================================
+   EVAC CENTERS
+====================================================== */
 
 .center {
     padding: 12px;
@@ -148,14 +206,26 @@ body {
     border: 1px solid #f4b3b7;
 }
 
+
+/* ======================================================
+   ACTION BUTTON ROW
+====================================================== */
+
 .actions {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    margin-top: 20px;
+    gap: 15px;
+
+    /* move upward */
+    margin-top: -20px;
+    margin-bottom: 60px; /* space above footer */
 }
 
-/* ================= BUTTONS ================= */
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+
 .edit,
 .logout {
     border: none;
@@ -165,7 +235,14 @@ body {
     transition: 0.15s ease;
     text-decoration: none;
     display: inline-block;
+
+    /* SAME FONT STYLING */
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .2px;
 }
+
+/* keep your original colors */
 
 .edit {
     background: #7fbfb2;
@@ -179,25 +256,12 @@ body {
 .logout {
     background: #e63946;
     color: white;
-    font-weight: 100; 
 }
 
 .logout:hover {
     background: #d32f3f;
 }
 
-.full-width {
-    grid-column: 1 / 3;
-}
-
-.actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-}
-
-
-/* ================= FAMILY BUTTON ================= */
 .add-family-btn {
     margin-top: 12px;
     padding: 10px 14px;
@@ -212,29 +276,37 @@ body {
     background: #276749;
 }
 
-/* ================= MODAL ================= */
+
+/* ======================================================
+   MODAL
+====================================================== */
+
 .modal {
     display: none;
     position: fixed;
-    z-index: 999;
     inset: 0;
+    z-index: 999;
     background: rgba(0,0,0,0.45);
+    padding: 120px 0 60px;
+    overflow-y: auto;
 }
 
 .modal-content {
     background: white;
     width: 500px;
     max-width: 95%;
-    margin: 80px auto;
+    margin: auto;
     padding: 25px;
     border-radius: 12px;
     position: relative;
-    animation: popIn 0.25s ease;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+    animation: popIn .25s ease;
 }
 
 @keyframes popIn {
-    from {transform: scale(.9); opacity:0;}
-    to {transform: scale(1); opacity:1;}
+    from { transform: scale(.9); opacity:0; }
+    to { transform: scale(1); opacity:1; }
 }
 
 .close {
@@ -245,12 +317,15 @@ body {
     cursor: pointer;
 }
 
-/* ================= MODAL FORM ================= */
+
+/* ======================================================
+   MODAL FORM
+====================================================== */
+
 .modal form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 6px;
     max-height: 80vh;
     overflow-y: auto;
     padding-right: 6px;
@@ -260,7 +335,6 @@ body {
     font-size: 12px;
     font-weight: 600;
     color: #374151;
-    margin-bottom: 2px;
 }
 
 .modal input,
@@ -271,16 +345,6 @@ body {
     border: 1px solid #d1d5db;
     background: #f9fafb;
     font-size: 13px;
-    transition: all 0.18s ease;
-    outline: none;
-}
-
-.modal input:focus,
-.modal select:focus,
-.modal textarea:focus {
-    border-color: #3182ce;
-    background: white;
-    box-shadow: 0 0 0 2px rgba(49,130,206,0.15);
 }
 
 .modal textarea {
@@ -297,26 +361,6 @@ body {
     border-radius: 8px;
     border: 1px solid #e5e7eb;
     cursor: pointer;
-    font-size: 13px;
-}
-
-.checkbox-row input {
-    transform: scale(1.1);
-    accent-color: #3182ce;
-}
-
-.modal input[type="file"] {
-    background: white;
-    border: 2px dashed #cbd5e1;
-    padding: 9px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-.modal input[type="file"]:hover {
-    border-color: #3182ce;
-    background: #f0f7ff;
 }
 
 .submit-family-btn {
@@ -326,149 +370,24 @@ body {
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.18s ease;
-    box-shadow: 0 3px 8px rgba(49,130,206,0.22);
-    position: sticky;
-    bottom: 0;
 }
 
-.submit-family-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 12px rgba(49,130,206,0.30);
-}
 
-.submit-family-btn:active {
-    transform: translateY(0);
-}
+/* ======================================================
+   DARK MODE
+====================================================== */
 
-/* ================= MODAL SPACING FIX ================= */
-.modal {
-    padding-top: 120px !important;
-    padding-bottom: 60px !important;
-    overflow-y: auto;
-}
-
-.modal-content {
-    margin: 0 auto !important;
-    max-height: calc(100vh - 180px);
-    overflow-y: auto;
-}
-
-/* ================= MOBILE RESPONSIVE ADJUSTMENTS ================= */
-@media (max-width: 768px) {
-    .profile-container {
-        padding: 110px 16px 40px;
-    }
-
-    .profile-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-    }
-
-    .main-profile,
-    .side-card,
-    .evac-card,
-    .full-width {
-        grid-column: auto;
-        grid-row: auto;
-    }
-
-    .profile-row {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .avatar {
-        width: 96px;
-        height: 96px;
-    }
-
-    .status {
-        margin-left: 0;
-        margin-top: 8px;
-    }
-
-    .card {
-        padding: 16px;
-        border-radius: 14px;
-    }
-
-    .notif-option {
-        font-size: 14px;
-    }
-
-    .center-content {
-        font-size: 14px;
-    }
-
-    .actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .edit,
-    .logout {
-        width: 100%;
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .add-family-btn {
-        width: 100%;
-    }
-
-    .modal {
-        padding-top: 90px !important;
-        padding-bottom: 30px !important;
-    }
-
-    .modal-content {
-        width: 100%;
-        max-width: 100%;
-        border-radius: 12px;
-        padding: 16px;
-        max-height: calc(100vh - 140px);
-    }
-
-    .modal form {
-        max-height: 65vh;
-    }
-
-    .submit-family-btn {
-        font-size: 15px;
-        padding: 12px;
-    }
-}
-
-/* ================= DARK MODE BASE ================= */
-body.dark-mode .profile-box,
-body.dark-mode .profile-card {
-  background: var(--card-bg);
-  color: var(--text-main);
-}
-
-body.dark-mode input,
-body.dark-mode textarea {
-  background: #111;
-  color: #fff;
-  border: 1px solid var(--border-light);
-}
-
-/* ================= DARK MODE - PROFILE & CARDS ================= */
 body.dark-mode {
-    background: #020617; 
+    background: #020617;
     color: #f1f5f9;
 }
 
 body.dark-mode .card,
 body.dark-mode .modal-content {
-    background: #1e293b; 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    background: #1e293b;
+    border: 1px solid rgba(255,255,255,.08);
     color: #f1f5f9;
 }
 
@@ -477,65 +396,156 @@ body.dark-mode .avatar {
     border-color: #475569;
 }
 
-body.dark-mode .side-card hr {
-    border: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
 body.dark-mode .notif-option {
-    background: #0f172a; 
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    color: #cbd5e1;
-}
-
-body.dark-mode .notif-option.checked {
-    background: rgba(34, 197, 94, 0.15); 
-    border: 1px solid #22c55e;
-    color: #ffffff;
-}
-
-body.dark-mode .notif-option.checked::after {
-    color: #4ade80;
+    background: #0f172a;
+    border-color: rgba(255,255,255,.05);
 }
 
 body.dark-mode .preferred {
-    background: rgba(34, 197, 94, 0.2);
-    border-color: #22c55e;
-    color: #ffffff;
+    background: rgba(34,197,94,.2);
 }
 
 body.dark-mode .alternative {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: #ef4444;
-    color: #ffffff;
+    background: rgba(239,68,68,.15);
 }
 
-body.dark-mode .center-content i {
-    color: #4ade80; 
+.actions {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 14px;
 }
 
-body.dark-mode .modal input,
-body.dark-mode .modal select,
-body.dark-mode .modal textarea,
-body.dark-mode .checkbox-row {
-    background: #0f172a;
-    color: #ffffff;
-    border: 1px solid #334155;
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 768px) {
+
+    /* page padding balanced under header */
+    .profile-container {
+        padding: 100px 14px 0px;
+    }
+
+    /* grid → single column */
+    .profile-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    /* cards less bulky */
+    .card {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    /* profile top section stack */
+    .profile-row {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .avatar {
+        width: 90px;
+        height: 90px;
+    }
+
+    /* profile text tighter */
+    .info p {
+        margin: 4px 0;
+        font-size: 14px;
+    }
+
+    /* status badge centered instead of right */
+    .status {
+        margin-left: 0;
+        justify-content: center;
+        margin-top: 6px;
+    }
+
+    /* family + evac content */
+    .center {
+        padding: 10px;
+    }
+
+    .center-content {
+        font-size: 14px;
+    }
+
+    /* notification rows */
+    .notif-option {
+        padding: 9px 10px;
+        font-size: 14px;
+    }
+
+    /* ACTION BUTTONS */
+    .actions {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+    margin-bottom: 30px;
+    align-items: center;
+
+    width: 100%;
+    max-width: 100%;
+    align-items: stretch;
 }
 
-body.dark-mode .modal form label {
-    color: #94a3b8;
+    .edit,
+    .logout,
+    .add-family-btn {
+        width: auto;
+        padding: 12px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+
+    .actions .edit,
+.actions .logout {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 17%;
+    max-width: 320px;
+    text-align: center;
 }
 
-body.dark-mode .modal input:focus {
-    background: #1e293b;
-    border-color: #3b82f6;
+    .edit,
+.logout {
+    width: 30%;
+    max-width: 320px;
 }
 
-body.dark-mode .close {
-    color: #94a3b8;
-}
+    /* MODAL mobile */
+    .modal {
+        padding: 70px 10px 20px;
+    }
 
-body.dark-mode .close:hover {
-    color: #ffffff;
+    .modal-content {
+        width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+        max-height: calc(100vh - 100px);
+    }
+
+    .modal form {
+        gap: 8px;
+    }
+
+    .modal input,
+    .modal select,
+    .modal textarea {
+        font-size: 14px;
+    }
+
+    .main-profile,
+.side-card,
+.evac-card,
+.full-width {
+    grid-column: auto !important;
+    grid-row: auto !important;
+}
 }
