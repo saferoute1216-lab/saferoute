@@ -10,11 +10,10 @@
       <h1>Welcome Admin!</h1>
       <p class="subtitle">Please make an account.</p>
 
-      <!-- ✅ submit to controller -->
        <?php if (isset($_GET['error'])): ?>
     <div class="form-error">Admin signup failed. Email may already exist.</div>
 <?php endif; ?>
-      <form action="/controllers/admin_signup_process.php" method="POST">
+      <form action="/httpdocs/controllers/admin_signup_process.php" method="POST">
 
         <div class="input-group">
           <label>First Name</label>
@@ -33,8 +32,16 @@
 
         <div class="input-group">
           <label>Position/Role</label>
-          <input type="text" name="role" placeholder="Enter your role" required>
+            <select name="role" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="Barangay Captain">Barangay Captain</option>
+              <option value="Barangay Staff">Barangay Staff</option>
+              <option value="Barangay SK"> Barangay SK Chairman</option>
+              <option value="DRRM Officer">DRRM Officer</option>
+              <option value="Administrator">Administrator</option>
+            </select>
         </div>
+
 
         <div class="input-group">
           <label>Employee/Barangay ID</label>
