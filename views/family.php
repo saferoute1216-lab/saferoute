@@ -14,13 +14,51 @@
 <div class="page">
 
     <!-- HEADER -->
-    <div class="topbar">
-        <div>
-            <h1>Family Tracking & Food Rations</h1>
-        </div>
-
-        <button class="btn-primary">+ Register Family</button>
+<div class="topbar">
+    <div>
+        <h1>Family Tracking & Food Rations</h1>
     </div>
+    <button class="btn-primary" id="openModalBtn">+ Register</button>
+</div>
+
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="closeModalBtn">&times;</span>
+        <h2 style="color: var(--accent-green);">Register Family</h2>
+        <hr style="border: 0; border-top: 1px solid var(--border-subtle); margin: 15px 0;">
+        
+        <form id="registerForm">
+            <div class="form-group"><label>First Name:</label><input type="text" name="firstname" required></div>
+            <div class="form-group"><label>Last Name:</label><input type="text" name="lastname" required></div>
+            <div class="form-group"><label>Address:</label><input type="text" name="address" required></div>
+            <div class="form-group"><label>Age:</label><input type="number" name="age" required></div>
+            <div class="form-group"><label>Date of Birth:</label><input type="date" name="dob" required></div>
+            
+            <div class="form-group">
+                <label>Sex:</label>
+                <div style="display: flex; gap: 20px; font-size: 14px;">
+                    <label style="font-weight: 400;"><input type="radio" name="sex" value="Male" required> Male</label>
+                    <label style="font-weight: 400;"><input type="radio" name="sex" value="Female"> Female</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width:100%; padding: 14px; margin-top: 10px;">Save Registration</button>
+        </form>
+    </div>
+</div>
+
+<div id="successModal" class="modal">
+    <div class="modal-content" style="text-align: center; max-width: 300px;">
+        <div style="font-size: 50px; color: #2e8b57; margin-bottom: 10px;">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2 style="color: var(--accent-green); margin-bottom: 10px;">Success!</h2>
+        <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">
+            Family has been registered successfully.
+        </p>
+        <button id="closeSuccessBtn" class="btn-primary" style="width: 100%;">Great!</button>
+    </div>
+</div>
 
 
     <!-- SUMMARY CARDS -->
