@@ -101,6 +101,7 @@
     </div>
   </div>
 
-  <script src="../js/header.js"></script>
+  <script src="/httpdocs/js/header.js"></script>
 </body>
+
 </html>
