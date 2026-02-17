@@ -525,18 +525,17 @@
 :root {
     --bg-main: #ffffff;
     --bg-card: #ffffff;
-    --text-header: #1e3a32; /* DARK GREEN for Light Mode */
+    --text-header: #1e3a32;
     --text-muted: #6b7280;
 }
 
 body.dark-mode {
     --bg-main: #121814;
     --bg-card: #1e2622;
-    --text-header: #ffffff; /* WHITE for Dark Mode */
+    --text-header: #ffffff; 
     --text-muted: #d1d5db;
 }
 
-/* Apply variables to the words you mentioned */
 .topbar h1, 
 .panel h3, 
 .kpi-card h3,
@@ -616,24 +615,21 @@ body.dark-mode .icon.green { background: #223a2a; color: #80ffaa; }
 
 /* --- RESPONSIVE ADJUSTMENTS --- */
 
-/* Standard padding for the main container */
 .page {
-    padding: 100px 20px 40px; /* Reduced top padding for mobile */
-}
+    padding: 100px 20px 40px; 
 
-/* 1. Stack KPI Cards on mobile */
 @media (max-width: 768px) {
     .cards {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+        grid-template-columns: repeat(2, 1fr); 
         gap: 12px;
     }
 
     .grid {
-        grid-template-columns: 1fr; /* Stack panels vertically */
+        grid-template-columns: 1fr; 
     }
 
     .quick-actions {
-        grid-template-columns: repeat(2, 1fr); /* 2x2 grid for actions */
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
@@ -645,8 +641,6 @@ body.dark-mode .icon.green { background: #223a2a; color: #80ffaa; }
     .topbar h1 {
         font-size: 22px;
     }
-
-    /* Stack cards into a single column on very small phones */
     .cards {
         grid-template-columns: 1fr;
     }
@@ -659,35 +653,30 @@ body.dark-mode .icon.green { background: #223a2a; color: #80ffaa; }
         padding: 12px;
     }
 
-    /* Make the Chart section scrollable if it's too wide */
     .trend-chart-wrap, .hazard-chart-wrap {
         overflow-x: auto;
         padding-bottom: 20px;
     }
 
-    /* Handle Tables on Mobile */
     .panel.full {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }
 
     table {
-        min-width: 600px; /* Allows horizontal swipe to see data */
+        min-width: 600px;
     }
 
-    /* Adjust Pie Chart size for small screens */
     .pie {
         width: 140px;
         height: 140px;
     }
     
-    /* Ensure icons don't shrink */
     .icon {
         min-width: 42px;
     }
 }
 
-/* Fix for dark mode variables to ensure they exist */
 :root {
     --border-subtle: #cfdad5;
     --chart-grid: #e5ece8;
@@ -699,3 +688,4 @@ body.dark-mode {
     --chart-grid: #1e2622;
     --text-main: #eef3f1;
 }
+
