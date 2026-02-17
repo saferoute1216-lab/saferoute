@@ -59,7 +59,7 @@
             <div>
                 <div class="card-title">Evacuation Centers</div>
                 <div class="card-value">
-                    <span class="count" data-target="12"></span>/15
+                    <span class="count" data-target="12"></span>15
                 </div>
 
                 <div class="card-sub">3 at capacity</div>
@@ -304,5 +304,6 @@
 <script src = "adminhome.js"> </script>
 </body>
 </html>
+
 
 <?php include 'footer.php'; ?>
