@@ -262,6 +262,21 @@ body {
 .dot.seniors { background: #c9dcd6; }
 .dot.infants { background: #e8f1ed; }
 
+.pie {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    margin: 10px auto 20px;
+
+    background: conic-gradient(
+        #4e7f73 0% 54%,     /* Adults 54% */
+        #8fb3a8 54% 85%,    /* Children 31% (54+31) */
+        #c9dcd6 85% 97%,    /* Seniors 12% */
+        #e8f1ed 97% 100%    /* Infants 4% */
+    );
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
 
 /* SEARCH */
 
@@ -613,3 +628,4 @@ body.dark-mode tbody tr:hover {
   }
 
 }
+
