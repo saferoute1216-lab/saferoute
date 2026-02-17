@@ -59,7 +59,7 @@
             <div>
                 <div class="card-title">Evacuation Centers</div>
                 <div class="card-value">
-                    <span class="count" data-target="12"></span>15
+                    <span class="count" data-target="12"></span>/15
                 </div>
 
                 <div class="card-sub">3 at capacity</div>
@@ -203,15 +203,16 @@
 
 
     <!-- TABLE -->
-    <div class="panel full">
-        <div class="panel-head">
-            <h3>Evacuation Center Status</h3>
-            <button class="btn-view">
-    <i class="fas fa-arrow-right"></i> View All
-</button>
-        </div>
+<div class="panel full">
+    <div class="panel-head">
+        <h3>Evacuation Center Status</h3>
+        <a href="analytics.php" class="btn-view" style="text-decoration: none;">
+            <i class="fas fa-arrow-right"></i> View All
+        </a>
+    </div>
 
-        <table>
+    <table>
+        <thead>
             <tr>
                 <th>Center Name</th>
                 <th>Capacity</th>
@@ -219,9 +220,10 @@
                 <th>Utilization</th>
                 <th>Status</th>
             </tr>
-
+        </thead>
+        <tbody>
             <tr>
-                <td>Barangay Hall #1</td>
+                <td><a href="evacdash.php#hall1" style="color: inherit; text-decoration: none; font-weight: 600;">Barangay Hall #1</a></td>
                 <td>500</td>
                 <td>320</td>
                 <td><div class="progress"><div style="width:64%"></div></div> 64%</td>
@@ -229,7 +231,7 @@
             </tr>
 
             <tr>
-                <td>School Gym</td>
+                <td><a href="evacdash.php#gym" style="color: inherit; text-decoration: none; font-weight: 600;">School Gym</a></td>
                 <td>300</td>
                 <td>285</td>
                 <td><div class="progress red"><div style="width:95%"></div></div> 95%</td>
@@ -237,7 +239,7 @@
             </tr>
 
             <tr>
-                <td>Community Center</td>
+                <td><a href="evacdash.php#community" style="color: inherit; text-decoration: none; font-weight: 600;">Community Center</a></td>
                 <td>400</td>
                 <td>398</td>
                 <td><div class="progress red"><div style="width:100%"></div></div> 100%</td>
@@ -245,26 +247,25 @@
             </tr>
 
             <tr>
-    <td>Sports Complex</td>
-    <td>600</td>
-    <td>324</td>
-    <td>
-        <div class="progress">
-            <div style="width:54%"></div>
-        </div>
-        54%
-    </td>
-    <td><span class="status ok">AVAILABLE</span></td>
-</tr>
-
-
-        </table>
-    </div>
+                <td><a href="evacdash.php#sports" style="color: inherit; text-decoration: none; font-weight: 600;">Sports Complex</a></td>
+                <td>600</td>
+                <td>324</td>
+                <td>
+                    <div class="progress">
+                        <div style="width:54%"></div>
+                    </div>
+                    54%
+                </td>
+                <td><span class="status ok">AVAILABLE</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
     <!-- QUICK ACTIONS -->
 <div class="quick-actions">
 
-    <a href="#" class="qa-card">
+    <a href="adminmap.php" class="qa-card">
         <i class="fas fa-location-dot"></i>
         <div class="qa-text">
             <div class="qa-title">View Live Map</div>
@@ -272,7 +273,7 @@
         </div>
     </a>
 
-    <a href="#" class="qa-card">
+    <a href="adminresource.php" class="qa-card">
         <i class="fas fa-box"></i>
         <div class="qa-text">
             <div class="qa-title">Manage Resources</div>
@@ -280,7 +281,7 @@
         </div>
     </a>
 
-    <a href="#" class="qa-card">
+    <a href="family.php" class="qa-card">
         <i class="fas fa-users"></i>
         <div class="qa-text">
             <div class="qa-title">Family Tracking</div>
@@ -288,7 +289,7 @@
         </div>
     </a>
 
-    <a href="#" class="qa-card">
+    <a href="analytics.php" class="qa-card">
         <i class="fas fa-arrow-trend-up"></i>
         <div class="qa-text">
             <div class="qa-title">View Analytics</div>
@@ -301,9 +302,8 @@
 
 </div>
 
-<script src = "adminhome.js"> </script>
+<script src = "/httpdocs/js/adminhome.js"> </script>
 </body>
 </html>
-
 
 <?php include 'footer.php'; ?>
