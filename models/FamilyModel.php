@@ -3,7 +3,8 @@ require_once __DIR__ . '/../config/db.php';
 
 class FamilyModel {
 
-    public static function userHasFamily($user_id) {
+    /* find family where user is OWNER */
+    public static function getUserFamilyId($user_id) {
         global $pdo;
 
         $stmt = $pdo->prepare("
@@ -14,7 +15,7 @@ class FamilyModel {
         ");
 
         $stmt->execute([$user_id]);
-        return $stmt->fetchColumn(); // returns id or false
+        return $stmt->fetchColumn() ?: null;
     }
 
     public static function getFamilyMembers($family_id) {
@@ -27,6 +28,10 @@ class FamilyModel {
         ");
 
         $stmt->execute([$family_id]);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function userHasFamily($user_id) {
+        return self::getUserFamilyId($user_id) !== null;
     }
 }
