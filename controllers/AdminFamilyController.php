@@ -1,15 +1,17 @@
+<?php
 session_start();
+
 require_once __DIR__ . '/../models/FamilyRequestModel.php';
 
 $action = $_GET['action'] ?? null;
 
-if ($action === 'approve') {
+if ($action === 'approve' && isset($_GET['id'])) {
     FamilyRequestModel::approve($_GET['id']);
     header("Location: ../views/family.php");
     exit;
 }
 
-if ($action === 'reject') {
+if ($action === 'reject' && isset($_GET['id'])) {
     FamilyRequestModel::reject($_GET['id']);
     header("Location: ../views/family.php");
     exit;
