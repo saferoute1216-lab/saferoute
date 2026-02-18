@@ -1,4 +1,31 @@
 <?php include 'header.php'; ?>
+
+<?php
+require_once __DIR__ . '/../config/db.php';
+
+$sql = "
+SELECT 
+	fr.request_id,
+    fr.family_name,
+    fr.address,
+    fr.barangay,
+    fr.proof_file,
+    fr.submitted_at,
+    u.first_name,
+    u.last_name,
+    u.email
+FROM family_requests fr
+LEFT JOIN userinfo u
+    ON fr.requested_by = u.id
+WHERE fr.status = 'pending'
+ORDER BY fr.submitted_at DESC
+";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,6 +86,88 @@
         <button id="closeSuccessBtn" class="btn-primary" style="width: 100%;">Great!</button>
     </div>
 </div>
+
+        <button class="btn-primary" onclick="openRequestModal()">+ Family Registration Request</button>
+</div>
+
+    <!-- ========================= -->
+<!-- REQUEST MODAL -->
+<!-- ========================= -->
+
+<div id="requestModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<h2>Family Registration Requests</h2>
+<span class="close" onclick="closeRequestModal()">&times;</span>
+</div>
+
+<div class="modal-body">
+
+<?php if (empty($requests)): ?>
+    <p>No pending requests.</p>
+<?php else: ?>
+
+<table class="request-table">
+<thead>
+<tr>
+<th>Requester</th>
+<th>Family Name</th>
+<th>Address</th>
+<th>Barangay</th>
+<th>Proof</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+<?php foreach ($requests as $r): ?>
+<tr>
+
+<td>
+<?= htmlspecialchars(($r['first_name'] ?? '') . ' ' . ($r['last_name'] ?? '')) ?><br>
+<small><?= htmlspecialchars($r['email'] ?? '') ?></small>
+</td>
+
+<td><?= htmlspecialchars($r['family_name'] ?? '') ?></td>
+<td><?= htmlspecialchars($r['address'] ?? '') ?></td>
+<td><?= htmlspecialchars($r['barangay'] ?? '') ?></td>
+
+<td>
+<?php if (!empty($r['proof_file'])): ?>
+<a href="/uploads/<?= htmlspecialchars($r['proof_file']) ?>" target="_blank">View</a>
+<?php else: ?>
+—
+<?php endif; ?>
+</td>
+
+<td><?= htmlspecialchars($r['submitted_at'] ?? '') ?></td>
+
+<td>
+
+<td>
+
+<a href="../controllers/AdminFamilyController.php?action=approve&id=<?= $r['request_id'] ?>">
+    <button type="button">Accept</button>
+</a>
+
+<a href="../controllers/AdminFamilyController.php?action=reject&id=<?= $r['request_id'] ?>">
+    <button type="button">Reject</button>
+</a>
+
+</td>
+
+</td>
+
+</tr>
+<?php endforeach; ?>
+
+</tbody>
+</table>
+
+<?php endif; ?>
+
 
 
     <!-- SUMMARY CARDS -->
@@ -321,3 +430,4 @@
 
 
 <?php include 'footer.php'; ?>
+
