@@ -1,0 +1,325 @@
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f7f9;
+  margin: 0;
+  color: #2c3e50;
+}
+
+/* ===== Container ===== */
+.profile-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 10px 20px 40px;
+}
+
+/* ===== Grid ===== */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Cards ===== */
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+}
+
+/* ===== Main Profile ===== */
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dfe6eb, #cfd8dc);
+  border: 4px solid #eef3f6;
+}
+
+/* ===== Info ===== */
+.info p {
+  margin: 8px 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.info strong {
+  color: #1e2a33;
+}
+
+/* ===== Status Badge ===== */
+.status {
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.safe {
+  background: #e6f7ee;
+  color: #1e874b;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+/* ===== Side Card ===== */
+.side-card h3 {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+/* ===== Lists ===== */
+.side-card ul {
+  padding-left: 18px;
+  margin: 10px 0;
+}
+
+.side-card li {
+  margin-bottom: 6px;
+}
+
+/* ===== Buttons ===== */
+.add-family-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s ease;
+  text-decoration: none;
+  margin-top: 8px;
+}
+
+.add-family-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+/* ===== Notification Options ===== */
+.notif-option {
+  background: #eef2f5;
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.notif-option.checked {
+  background: #e8f6ef;
+  color: #1e874b;
+  font-weight: 600;
+}
+
+/* ===== Evacuation Cards ===== */
+.evac-card h3 {
+  margin-top: 0;
+}
+
+.center {
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.preferred {
+  background: #e6f4ea;
+  color: #1b7f46;
+  border: 1px solid #b7e2c7;
+}
+
+.alternative {
+  background: #fdecea;
+  color: #b42318;
+  border: 1px solid #f5b5ae;
+}
+
+/* ===== Actions Row ===== */
+.actions {
+  display: flex;
+  gap: 14px;
+  justify-content: flex-end;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.actions a,
+.actions button {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+/* Edit */
+.actions .edit {
+  background: #6fc1b6;
+  color: white;
+}
+
+.actions .edit:hover {
+  background: #58b3a6;
+}
+
+/* Delete */
+.actions .delete {
+  background: #fbeaea;
+  color: #c0392b;
+}
+
+.actions .delete:hover {
+  background: #f5d6d2;
+}
+
+/* Logout */
+.actions .logout {
+  background: #e74c3c;
+  color: white;
+}
+
+.actions .logout:hover {
+  background: #cf3f31;
+}
+
+/* ===== Messages ===== */
+.success-msg {
+  background: #e9f9f0;
+  color: #1e874b;
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.error-msg {
+  background: #fdecea;
+  color: #b42318;
+  padding: 14px 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* ===== Modal ===== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  width: 95%;
+  max-width: 480px;
+  margin: 8% auto;
+  padding: 26px;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.15);
+  position: relative;
+  animation: modalIn 0.2s ease;
+}
+
+@keyframes modalIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content label {
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+.modal-content input,
+.modal-content textarea,
+.modal-content select {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid #d6dde3;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+  outline: none;
+  border-color: #1abc9c;
+}
+
+/* Modal Button */
+.modal-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1abc9c, #16a085);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.modal-btn:hover {
+  filter: brightness(1.05);
+}
+
+/* Close */
+.close {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #888;
+}
+
+.close:hover {
+  color: #000;
+}
