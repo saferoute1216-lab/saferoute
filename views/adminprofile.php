@@ -3,18 +3,24 @@ require_once __DIR__ . '/../config/db.php';
 
 session_start();
 
-$user_id = $_SESSION['user_id'] ?? 0;
+/* ===== Admin auth guard ===== */
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: /views/signin_admin.php");
+    exit;
+}
+
+$admin_id = $_SESSION['admin_id'];
 
 /* ===== Fetch admin info ===== */
-$user_stmt = $pdo->prepare("
-    SELECT first_name, last_name, email, address
-    FROM userinfo
-    WHERE id = ?
+$stmt = $pdo->prepare("
+    SELECT admin_id, first_name, last_name, email, position
+    FROM admins
+    WHERE admin_id = ?
 ");
-$user_stmt->execute([$user_id]);
-$user = $user_stmt->fetch(PDO::FETCH_ASSOC);
+$stmt->execute([$admin_id]);
+$admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$user) {
+if (!$admin) {
     die("Admin not found.");
 }
 ?>
@@ -50,15 +56,15 @@ Profile updated successfully.
 
 <div class="info">
 <p><strong>Admin Name:</strong><br>
-<?= htmlspecialchars(($user['first_name'] ?? '') . ' ' . ($user['last_name'] ?? '')) ?>
+<?= htmlspecialchars($admin['first_name'] . ' ' . $admin['last_name']) ?>
 </p>
 
 <p><strong>Email Address:</strong><br>
-<?= htmlspecialchars($user['email'] ?? '') ?>
+<?= htmlspecialchars($admin['email']) ?>
 </p>
 
-<p><strong>Address:</strong><br>
-<?= htmlspecialchars($user['address'] ?? '') ?>
+<p><strong>Position:</strong><br>
+<?= htmlspecialchars($admin['position']) ?>
 </p>
 
 <p><strong>Role:</strong><br>
@@ -119,7 +125,7 @@ Profile & Account Controls Enabled
 Edit Account
 </button>
 
-<a href="/controllers/UserController.php?action=delete"
+<a href="/controllers/AdminController.php?action=delete"
    class="delete"
    onclick="return confirm('Delete this admin account permanently?')">
 Delete Account
@@ -140,29 +146,25 @@ Logout
 
 <h2>Edit Admin Account</h2>
 
-<form method="POST" action="/controllers/UserController.php?action=update">
+<form method="POST" action="/controllers/AdminController.php?action=update">
 
 <label>First Name</label>
 <input type="text"
        name="first_name"
-       value="<?= htmlspecialchars($user['first_name']) ?>"
+       value="<?= htmlspecialchars($admin['first_name']) ?>"
        required>
 
 <label>Last Name</label>
 <input type="text"
        name="last_name"
-       value="<?= htmlspecialchars($user['last_name']) ?>"
+       value="<?= htmlspecialchars($admin['last_name']) ?>"
        required>
 
 <label>Email</label>
 <input type="email"
        name="email"
-       value="<?= htmlspecialchars($user['email']) ?>"
+       value="<?= htmlspecialchars($admin['email']) ?>"
        required>
-
-<label>Address</label>
-<textarea name="address"
-          required><?= htmlspecialchars($user['address']) ?></textarea>
 
 <button type="submit" class="modal-btn">
 Save Changes
