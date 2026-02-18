@@ -61,7 +61,7 @@
                                         </div>
                                     </details>
                                 <?php else: ?>
-                                    <i class="fas fa-user" style="color:#ccc; margin-right:8px;"></i> <?php echo $rand_name; ?>
+                                    <i class="fas fa-user" style="color:#01857A; margin-right:8px;"></i> <?php echo $rand_name; ?>
                                 <?php endif; ?>
                             </td>
                             <td style="font-size:13px;"><?php echo $is_individual ? "Single" : "Family"; ?></td>
@@ -82,5 +82,6 @@
         </div>
     <?php endforeach; ?>
 </div>
+
 
 <?php include 'footer.php'; ?>
