@@ -4,13 +4,16 @@ require_once __DIR__ . '/../models/FamilyModel.php';
 
 session_start();
 
+header('Content-Type: application/json');
+
 /* =========================================
-   Security: Must Be Logged In
+   Must Be Logged In
 ========================================= */
 if (!isset($_SESSION['user_id'])) {
     http_response_code(403);
     echo json_encode([
-        "error" => "Unauthorized"
+        "status" => "error",
+        "message" => "Unauthorized"
     ]);
     exit;
 }
@@ -18,12 +21,25 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 /* =========================================
-   Prevent If Already Has Family
+   Prevent If Already In Family
 ========================================= */
 if (FamilyModel::userHasFamily($user_id)) {
-    http_response_code(400);
     echo json_encode([
-        "error" => "You are already part of a family."
+        "status" => "error",
+        "message" => "You are already part of a family."
+    ]);
+    exit;
+}
+
+/* =========================================
+   Prevent If Already Has Pending Request
+========================================= */
+if (method_exists('FamilyModel', 'hasPendingJoinRequest') 
+    && FamilyModel::hasPendingJoinRequest($user_id)) {
+
+    echo json_encode([
+        "status" => "error",
+        "message" => "You already have a pending join request."
     ]);
     exit;
 }
@@ -31,8 +47,7 @@ if (FamilyModel::userHasFamily($user_id)) {
 /* =========================================
    Get Search Keyword
 ========================================= */
-$keyword = $_GET['keyword'] ?? '';
-$keyword = trim($keyword);
+$keyword = trim($_GET['keyword'] ?? '');
 
 /* =========================================
    Fetch Families
@@ -44,8 +59,10 @@ if (!empty($keyword)) {
 }
 
 /* =========================================
-   Return JSON
+   Return Success Response
 ========================================= */
-header('Content-Type: application/json');
-echo json_encode($families);
+echo json_encode([
+    "status" => "success",
+    "data"   => $families
+]);
 exit;
