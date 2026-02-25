@@ -55,54 +55,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $family_id    = $_POST['family_id'] ?? '';
-$full_name    = trim($_POST['full_name'] ?? '');
 $relationship = trim($_POST['relationship'] ?? '');
-$contact      = trim($_POST['contact'] ?? '');
-$address      = trim($_POST['address'] ?? '');
 
-if (empty($family_id) || empty($full_name) || empty($relationship)) {
+if (empty($family_id) || empty($relationship)) {
     echo json_encode([
         "status" => "error",
-        "message" => "Required fields are missing."
+        "message" => "Please select a family and relationship."
     ]);
     exit;
 }
 
 /* =========================================
-   Handle Proof File Upload
-========================================= */
-$proof_file_path = null;
-
-if (isset($_FILES['proof_file']) && $_FILES['proof_file']['error'] === 0) {
-
-    $upload_dir = __DIR__ . '/../uploads/join_proofs/';
-
-    if (!is_dir($upload_dir)) {
-        mkdir($upload_dir, 0777, true);
-    }
-
-    $file_name = time() . '_' . basename($_FILES['proof_file']['name']);
-    $target_path = $upload_dir . $file_name;
-
-    if (move_uploaded_file($_FILES['proof_file']['tmp_name'], $target_path)) {
-        $proof_file_path = 'uploads/join_proofs/' . $file_name;
-    }
-}
-
-/* =========================================
    Create Join Request
 ========================================= */
-$data = [
-    'requested_by' => $user_id,
-    'family_id'    => $family_id,
-    'full_name'    => $full_name,
-    'relationship' => $relationship,
-    'contact'      => $contact,
-    'address'      => $address,
-    'proof_file'   => $proof_file_path
-];
-
-$created = FamilyModel::createJoinRequest($data);
+$created = FamilyModel::createJoinRequest(
+    $user_id,
+    $family_id,
+    $relationship
+);
 
 if ($created) {
     echo json_encode([
